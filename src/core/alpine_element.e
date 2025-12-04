@@ -649,6 +649,11 @@ feature {NONE} -- Implementation
 			attributes.force (a_value.to_string_32, a_name)
 		ensure
 			attribute_set: attached attributes.item (a_name)
+			value_matches: attached attributes.item (a_name) as v implies v.same_string (a_value.to_string_32)
 		end
+
+invariant
+	-- ALPINE_ELEMENT inherits from HTMX_ELEMENT which provides attributes hash table
+	-- Alpine directives are just attributes, so we inherit HTMX_ELEMENT's invariant
 
 end

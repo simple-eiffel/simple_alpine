@@ -305,26 +305,47 @@ feature -- Expression Builders: Toggle
 	toggle (a_property: STRING): STRING
 			-- Generate toggle expression.
 			-- Example: toggle ("open") → "open = !open"
+		require
+			property_not_empty: not a_property.is_empty
 		do
 			Result := a_property + " = !" + a_property
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_property: Result.has_substring (a_property)
+			contains_negation: Result.has_substring ("!")
 		end
 
 	set_true (a_property: STRING): STRING
 			-- Set property to true.
+		require
+			property_not_empty: not a_property.is_empty
 		do
 			Result := a_property + " = true"
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_true: Result.has_substring ("true")
 		end
 
 	set_false (a_property: STRING): STRING
 			-- Set property to false.
+		require
+			property_not_empty: not a_property.is_empty
 		do
 			Result := a_property + " = false"
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_false: Result.has_substring ("false")
 		end
 
 	set_value (a_property, a_value: STRING): STRING
 			-- Set property to value.
+		require
+			property_not_empty: not a_property.is_empty
 		do
 			Result := a_property + " = " + a_value
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_property: Result.has_substring (a_property)
 		end
 
 feature -- Expression Builders: Conditionals
@@ -332,14 +353,24 @@ feature -- Expression Builders: Conditionals
 	ternary (a_condition, a_true_value, a_false_value: STRING): STRING
 			-- Generate ternary expression.
 			-- Example: ternary ("open", "'block'", "'none'") → "open ? 'block' : 'none'"
+		require
+			condition_not_empty: not a_condition.is_empty
 		do
 			Result := a_condition + " ? " + a_true_value + " : " + a_false_value
+		ensure
+			result_not_empty: not Result.is_empty
+			has_question_mark: Result.has_substring ("?")
+			has_colon: Result.has_substring (":")
 		end
 
 	if_else (a_condition, a_true_value, a_false_value: STRING): STRING
 			-- Alias for ternary.
+		require
+			condition_not_empty: not a_condition.is_empty
 		do
 			Result := ternary (a_condition, a_true_value, a_false_value)
+		ensure
+			result_not_empty: not Result.is_empty
 		end
 
 feature -- Expression Builders: Class Binding
@@ -347,14 +378,24 @@ feature -- Expression Builders: Class Binding
 	class_if (a_class, a_condition: STRING): STRING
 			-- Conditional class object.
 			-- Example: class_if ("active", "isActive") → "{ 'active': isActive }"
+		require
+			class_not_empty: not a_class.is_empty
+			condition_not_empty: not a_condition.is_empty
 		do
 			Result := "{ '" + a_class + "': " + a_condition + " }"
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_brace: Result.starts_with ("{ ")
+			ends_with_brace: Result.ends_with (" }")
+			contains_class: Result.has_substring (a_class)
 		end
 
 	class_multi (a_bindings: ARRAY [TUPLE [class_name: STRING; condition: STRING]]): STRING
 			-- Multiple conditional classes.
 			-- Example: class_multi (<<["active", "isActive"], ["hidden", "!isVisible"]>>)
 			--          → "{ 'active': isActive, 'hidden': !isVisible }"
+		require
+			bindings_not_empty: not a_bindings.is_empty
 		local
 			i: INTEGER
 		do
@@ -368,38 +409,68 @@ feature -- Expression Builders: Class Binding
 				Result.append ("': ")
 				Result.append (a_bindings [i].condition)
 				i := i + 1
+			variant
+				a_bindings.upper - i + 1
 			end
 			Result.append (" }")
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_brace: Result.starts_with ("{ ")
+			ends_with_brace: Result.ends_with (" }")
 		end
 
 feature -- Expression Builders: Data Object
 
 	data_bool (a_name: STRING; a_value: BOOLEAN): STRING
 			-- Boolean property.
+		require
+			name_not_empty: not a_name.is_empty
 		do
 			Result := a_name + ": " + a_value.out.as_lower
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_name: Result.has_substring (a_name)
+			contains_colon: Result.has_substring (":")
 		end
 
 	data_string (a_name, a_value: STRING): STRING
 			-- String property.
+		require
+			name_not_empty: not a_name.is_empty
 		do
 			Result := a_name + ": '" + a_value + "'"
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_name: Result.has_substring (a_name)
+			contains_quotes: Result.has_substring ("'")
 		end
 
 	data_int (a_name: STRING; a_value: INTEGER): STRING
 			-- Integer property.
+		require
+			name_not_empty: not a_name.is_empty
 		do
 			Result := a_name + ": " + a_value.out
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_name: Result.has_substring (a_name)
 		end
 
 	data_null (a_name: STRING): STRING
 			-- Null property.
+		require
+			name_not_empty: not a_name.is_empty
 		do
 			Result := a_name + ": null"
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_null: Result.has_substring ("null")
 		end
 
 	data_array (a_name: STRING; a_values: ARRAY [STRING]): STRING
 			-- Array property.
+		require
+			name_not_empty: not a_name.is_empty
 		local
 			i: INTEGER
 		do
@@ -410,14 +481,21 @@ feature -- Expression Builders: Data Object
 				end
 				Result.append (a_values [i])
 				i := i + 1
+			variant
+				a_values.upper - i + 1
 			end
 			Result.append ("]")
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_name: Result.has_substring (a_name)
 		end
 
 	data_object (a_properties: ARRAY [STRING]): STRING
 			-- Combine properties into x-data object.
 			-- Example: data_object (<<data_bool ("open", false), data_int ("count", 0)>>)
 			--          → "{ open: false, count: 0 }"
+		require
+			properties_not_empty: not a_properties.is_empty
 		local
 			i: INTEGER
 		do
@@ -428,8 +506,14 @@ feature -- Expression Builders: Data Object
 				end
 				Result.append (a_properties [i])
 				i := i + 1
+			variant
+				a_properties.upper - i + 1
 			end
 			Result.append (" }")
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_brace: Result.starts_with ("{ ")
+			ends_with_brace: Result.ends_with (" }")
 		end
 
 feature -- Magic Property Helpers
@@ -439,38 +523,70 @@ feature -- Magic Property Helpers
 
 	refs (a_name: STRING): STRING
 			-- Reference to named element.
+		require
+			name_not_empty: not a_name.is_empty
 		do
 			Result := "$refs." + a_name
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_refs: Result.starts_with ("$refs.")
 		end
 
 	store (a_name: STRING): STRING
 			-- Reference to global store.
+		require
+			name_not_empty: not a_name.is_empty
 		do
 			Result := "$store." + a_name
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_store: Result.starts_with ("$store.")
 		end
 
 	dispatch (a_event: STRING): STRING
 			-- Dispatch custom event.
+		require
+			event_not_empty: not a_event.is_empty
 		do
 			Result := "$dispatch('" + a_event + "')"
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_dispatch: Result.starts_with ("$dispatch(")
 		end
 
 	dispatch_with_data (a_event, a_data: STRING): STRING
 			-- Dispatch event with data.
+		require
+			event_not_empty: not a_event.is_empty
 		do
 			Result := "$dispatch('" + a_event + "', " + a_data + ")"
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_dispatch: Result.starts_with ("$dispatch(")
+			contains_event: Result.has_substring (a_event)
 		end
 
 	next_tick (a_expression: STRING): STRING
 			-- Run expression after DOM update.
+		require
+			expression_not_empty: not a_expression.is_empty
 		do
 			Result := "$nextTick(() => { " + a_expression + " })"
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_nexttick: Result.starts_with ("$nextTick(")
 		end
 
 	watch (a_property, a_callback: STRING): STRING
 			-- Watch property for changes.
+		require
+			property_not_empty: not a_property.is_empty
+			callback_not_empty: not a_callback.is_empty
 		do
 			Result := "$watch('" + a_property + "', " + a_callback + ")"
+		ensure
+			result_not_empty: not Result.is_empty
+			starts_with_watch: Result.starts_with ("$watch(")
 		end
 
 feature -- Pre-built Patterns: Dark Mode
@@ -562,34 +678,59 @@ feature -- Pre-built Patterns: Accordion
 
 	accordion_toggle (a_index: INTEGER): STRING
 			-- Expression to toggle accordion item.
+		require
+			non_negative_index: a_index >= 0
 		do
 			Result := "activeIndex = activeIndex === " + a_index.out + " ? null : " + a_index.out
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_activeindex: Result.has_substring ("activeIndex")
 		end
 
 	accordion_is_open (a_index: INTEGER): STRING
 			-- Expression to check if accordion item is open.
+		require
+			non_negative_index: a_index >= 0
 		do
 			Result := "activeIndex === " + a_index.out
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_activeindex: Result.has_substring ("activeIndex")
 		end
 
 feature -- Pre-built Patterns: Tabs
 
 	tabs_data (a_default_tab: STRING): STRING
 			-- Standard tabs x-data.
+		require
+			tab_not_empty: not a_default_tab.is_empty
 		do
 			Result := "{ activeTab: '" + a_default_tab + "' }"
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_tab: Result.has_substring (a_default_tab)
 		end
 
 	tabs_select (a_tab: STRING): STRING
 			-- Expression to select a tab.
+		require
+			tab_not_empty: not a_tab.is_empty
 		do
 			Result := "activeTab = '" + a_tab + "'"
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_tab: Result.has_substring (a_tab)
 		end
 
 	tabs_is_active (a_tab: STRING): STRING
 			-- Expression to check if tab is active.
+		require
+			tab_not_empty: not a_tab.is_empty
 		do
 			Result := "activeTab === '" + a_tab + "'"
+		ensure
+			result_not_empty: not Result.is_empty
+			contains_tab: Result.has_substring (a_tab)
 		end
 
 feature -- Pre-built Patterns: Counter

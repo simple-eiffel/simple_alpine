@@ -369,6 +369,442 @@ feature -- Test: Combined with HTMX
 			assert_has_substring ("hx-target present", l_btn.to_html_8, "hx-target=")
 		end
 
+feature -- Test: Additional Event Modifiers
+
+	test_x_on_click_stop
+			-- Test @click.stop modifier.
+		local
+			l_btn: ALPINE_BUTTON
+		do
+			create l_btn.make
+			l_btn.x_on_click_stop ("handleClick()").do_nothing
+			assert_has_substring ("@click.stop present", l_btn.to_html_8, "@click.stop=")
+		end
+
+	test_x_on_click_once
+			-- Test @click.once modifier.
+		local
+			l_btn: ALPINE_BUTTON
+		do
+			create l_btn.make
+			l_btn.x_on_click_once ("initialize()").do_nothing
+			assert_has_substring ("@click.once present", l_btn.to_html_8, "@click.once=")
+		end
+
+	test_x_on_change
+			-- Test @change event.
+		local
+			l_select: ALPINE_SELECT
+		do
+			create l_select.make
+			l_select.x_on_change ("updateSelection()").do_nothing
+			assert_has_substring ("@change present", l_select.to_html_8, "@change=")
+		end
+
+	test_x_on_input
+			-- Test @input event.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_on_input ("handleInput()").do_nothing
+			assert_has_substring ("@input present", l_input.to_html_8, "@input=")
+		end
+
+	test_x_on_focus
+			-- Test @focus event.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_on_focus ("focused = true").do_nothing
+			assert_has_substring ("@focus present", l_input.to_html_8, "@focus=")
+		end
+
+	test_x_on_blur
+			-- Test @blur event.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_on_blur ("focused = false").do_nothing
+			assert_has_substring ("@blur present", l_input.to_html_8, "@blur=")
+		end
+
+	test_x_on_mouseenter
+			-- Test @mouseenter event.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_mouseenter ("hovering = true").do_nothing
+			assert_has_substring ("@mouseenter present", l_div.to_html_8, "@mouseenter=")
+		end
+
+	test_x_on_mouseleave
+			-- Test @mouseleave event.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_mouseleave ("hovering = false").do_nothing
+			assert_has_substring ("@mouseleave present", l_div.to_html_8, "@mouseleave=")
+		end
+
+	test_x_on_submit
+			-- Test @submit event.
+		local
+			l_form: ALPINE_FORM
+		do
+			create l_form.make
+			l_form.x_on_submit ("handleSubmit()").do_nothing
+			assert_has_substring ("@submit present", l_form.to_html_8, "@submit=")
+		end
+
+feature -- Test: Additional Keyboard Events
+
+	test_x_on_keydown
+			-- Test @keydown event.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_on_keydown ("handleKey($event)").do_nothing
+			assert_has_substring ("@keydown present", l_input.to_html_8, "@keydown=")
+		end
+
+	test_x_on_keydown_tab
+			-- Test @keydown.tab.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_on_keydown_tab ("handleTab()").do_nothing
+			assert_has_substring ("@keydown.tab present", l_input.to_html_8, "@keydown.tab=")
+		end
+
+	test_x_on_keydown_arrow_up
+			-- Test @keydown.arrow-up.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_keydown_arrow_up ("selectPrevious()").do_nothing
+			assert_has_substring ("@keydown.arrow-up present", l_div.to_html_8, "@keydown.arrow-up=")
+		end
+
+	test_x_on_keydown_arrow_down
+			-- Test @keydown.arrow-down.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_keydown_arrow_down ("selectNext()").do_nothing
+			assert_has_substring ("@keydown.arrow-down present", l_div.to_html_8, "@keydown.arrow-down=")
+		end
+
+	test_x_on_keydown_space
+			-- Test @keydown.space.
+		local
+			l_btn: ALPINE_BUTTON
+		do
+			create l_btn.make
+			l_btn.x_on_keydown_space ("toggle()").do_nothing
+			assert_has_substring ("@keydown.space present", l_btn.to_html_8, "@keydown.space=")
+		end
+
+	test_x_on_keyup
+			-- Test @keyup event.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_on_keyup ("handleKeyUp()").do_nothing
+			assert_has_substring ("@keyup present", l_input.to_html_8, "@keyup=")
+		end
+
+	test_x_on_keyup_escape
+			-- Test @keyup.escape.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_keyup_escape ("cancel()").do_nothing
+			assert_has_substring ("@keyup.escape present", l_div.to_html_8, "@keyup.escape=")
+		end
+
+	test_x_on_keyup_enter
+			-- Test @keyup.enter.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_on_keyup_enter ("confirm()").do_nothing
+			assert_has_substring ("@keyup.enter present", l_input.to_html_8, "@keyup.enter=")
+		end
+
+feature -- Test: Window/Document Events
+
+	test_x_on_window
+			-- Test window event listener.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_window ("resize", "handleResize()").do_nothing
+			assert_has_substring ("@resize.window present", l_div.to_html_8, "@resize.window=")
+		end
+
+	test_x_on_document
+			-- Test document event listener.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_document ("click", "handleDocClick()").do_nothing
+			assert_has_substring ("@click.document present", l_div.to_html_8, "@click.document=")
+		end
+
+	test_x_on_scroll_window
+			-- Test window scroll event.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_scroll_window ("handleScroll()").do_nothing
+			assert_has_substring ("@scroll.window present", l_div.to_html_8, "@scroll.window=")
+		end
+
+	test_x_on_resize_window
+			-- Test window resize event.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_on_resize_window ("updateLayout()").do_nothing
+			assert_has_substring ("@resize.window present", l_div.to_html_8, "@resize.window=")
+		end
+
+feature -- Test: Additional Binding
+
+	test_x_bind
+			-- Test generic x-bind.
+		local
+			l_a: ALPINE_A
+		do
+			create l_a.make
+			l_a.x_bind ("href", "linkUrl").do_nothing
+			assert_has_substring ("x-bind:href present", l_a.to_html_8, "x-bind:href=")
+		end
+
+	test_x_bind_hidden
+			-- Test :hidden binding.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_bind_hidden ("isHidden").do_nothing
+			assert_has_substring (":hidden present", l_div.to_html_8, ":hidden=")
+		end
+
+	test_x_bind_href
+			-- Test :href binding.
+		local
+			l_a: ALPINE_A
+		do
+			create l_a.make
+			l_a.x_bind_href ("url").do_nothing
+			assert_has_substring (":href present", l_a.to_html_8, ":href=")
+		end
+
+	test_x_bind_src
+			-- Test :src binding.
+		local
+			l_img: ALPINE_IMG
+		do
+			create l_img.make
+			l_img.x_bind_src ("imageUrl").do_nothing
+			assert_has_substring (":src present", l_img.to_html_8, ":src=")
+		end
+
+	test_x_bind_value
+			-- Test :value binding.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_bind_value ("inputValue").do_nothing
+			assert_has_substring (":value present", l_input.to_html_8, ":value=")
+		end
+
+feature -- Test: Additional x-model
+
+	test_x_model_number
+			-- Test x-model.number modifier.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_model_number ("quantity").do_nothing
+			assert_has_substring ("x-model.number present", l_input.to_html_8, "x-model.number=")
+		end
+
+	test_x_model_throttle
+			-- Test x-model.throttle modifier.
+		local
+			l_input: ALPINE_INPUT
+		do
+			create l_input.make
+			l_input.x_model_throttle ("search", 200).do_nothing
+			assert_has_substring ("x-model.throttle present", l_input.to_html_8, "x-model.throttle.200ms=")
+		end
+
+feature -- Test: Additional Transitions
+
+	test_x_transition_scale
+			-- Test x-transition.scale.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_transition_scale.do_nothing
+			assert_has_substring ("x-transition.scale present", l_div.to_html_8, "x-transition.scale")
+		end
+
+	test_x_transition_delay
+			-- Test x-transition.delay.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_transition_delay (100).do_nothing
+			assert_has_substring ("x-transition.delay present", l_div.to_html_8, "x-transition.delay.100ms")
+		end
+
+	test_x_transition_enter
+			-- Test x-transition:enter.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_transition_enter ("transition ease-out duration-300").do_nothing
+			assert_has_substring ("x-transition:enter present", l_div.to_html_8, "x-transition:enter=")
+		end
+
+	test_x_transition_leave
+			-- Test x-transition:leave.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_transition_leave ("transition ease-in duration-200").do_nothing
+			assert_has_substring ("x-transition:leave present", l_div.to_html_8, "x-transition:leave=")
+		end
+
+feature -- Test: Other Directives
+
+	test_x_effect
+			-- Test x-effect directive.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_effect ("console.log(count)").do_nothing
+			assert_has_substring ("x-effect present", l_div.to_html_8, "x-effect=")
+		end
+
+	test_x_ignore
+			-- Test x-ignore directive.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_ignore.do_nothing
+			assert_has_substring ("x-ignore present", l_div.to_html_8, "x-ignore")
+		end
+
+	test_x_teleport
+			-- Test x-teleport directive.
+		local
+			l_template: ALPINE_TEMPLATE
+		do
+			create l_template.make
+			l_template.x_teleport ("body").do_nothing
+			assert_has_substring ("x-teleport present", l_template.to_html_8, "x-teleport=")
+		end
+
+	test_x_id
+			-- Test x-id directive.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_id ("['dropdown-button', 'dropdown-menu']").do_nothing
+			assert_has_substring ("x-id present", l_div.to_html_8, "x-id=")
+		end
+
+feature -- Test: Additional Plugin Directives
+
+	test_x_collapse_duration
+			-- Test x-collapse.duration.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_collapse_duration (500).do_nothing
+			assert_has_substring ("x-collapse.duration present", l_div.to_html_8, "x-collapse.duration.500ms")
+		end
+
+	test_x_trap_inert
+			-- Test x-trap.inert.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_trap_inert ("open").do_nothing
+			assert_has_substring ("x-trap.inert present", l_div.to_html_8, "x-trap.inert=")
+		end
+
+	test_x_trap_noscroll
+			-- Test x-trap.noscroll.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_trap_noscroll ("open").do_nothing
+			assert_has_substring ("x-trap.noscroll present", l_div.to_html_8, "x-trap.noscroll=")
+		end
+
+	test_x_intersect_enter
+			-- Test x-intersect:enter.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_intersect_enter ("animateIn()").do_nothing
+			assert_has_substring ("x-intersect:enter present", l_div.to_html_8, "x-intersect:enter=")
+		end
+
+	test_x_intersect_leave
+			-- Test x-intersect:leave.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_intersect_leave ("animateOut()").do_nothing
+			assert_has_substring ("x-intersect:leave present", l_div.to_html_8, "x-intersect:leave=")
+		end
+
+	test_x_intersect_once
+			-- Test x-intersect.once.
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_intersect_once ("loadOnce()").do_nothing
+			assert_has_substring ("x-intersect.once present", l_div.to_html_8, "x-intersect.once=")
+		end
+
 feature {NONE} -- Implementation
 
 	assert_has_substring (a_tag: STRING; a_string, a_substring: STRING)
