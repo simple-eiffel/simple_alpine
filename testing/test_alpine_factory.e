@@ -277,13 +277,6 @@ feature -- Test: Element Creation
 
 feature {NONE} -- Implementation
 
-	assert_strings_equal (a_tag: STRING; a_expected, a_actual: STRING)
-			-- Assert strings are equal.
-		do
-			assert (a_tag + " [expected: " + a_expected + ", got: " + a_actual + "]",
-				a_expected.same_string (a_actual))
-		end
-
 	assert_has_substring (a_tag: STRING; a_string, a_substring: STRING)
 			-- Assert that a_string contains a_substring.
 		do
