@@ -35,7 +35,7 @@ feature -- Alpine: State Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-data") as v and then v.same_string (a_state.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-data") as v and then v.same_string (a_state.to_string_32)
 		end
 
 	x_data_empty: like Current
@@ -58,7 +58,7 @@ feature -- Alpine: State Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-init") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-init") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature -- Alpine: Visibility Directives
@@ -71,7 +71,7 @@ feature -- Alpine: Visibility Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-show") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-show") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_if (a_expression: READABLE_STRING_GENERAL): like Current
@@ -83,7 +83,7 @@ feature -- Alpine: Visibility Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-if") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-if") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_cloak: like Current
@@ -107,7 +107,7 @@ feature -- Alpine: Content Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-text") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-text") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_html (a_expression: READABLE_STRING_GENERAL): like Current
@@ -118,7 +118,7 @@ feature -- Alpine: Content Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-html") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-html") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature -- Alpine: Event Directives (x-on / @)
@@ -133,7 +133,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attributes.has ("x-on:" + a_event.to_string_8)
+			attribute_set: raw_attributes.has ("x-on:" + a_event.to_string_8)
 		end
 
 	x_on_click (a_expression: READABLE_STRING_GENERAL): like Current
@@ -144,7 +144,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@click") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@click") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_click_prevent (a_expression: READABLE_STRING_GENERAL): like Current
@@ -154,7 +154,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@click.prevent") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@click.prevent") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_click_stop (a_expression: READABLE_STRING_GENERAL): like Current
@@ -164,7 +164,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@click.stop") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@click.stop") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_click_outside (a_expression: READABLE_STRING_GENERAL): like Current
@@ -175,7 +175,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@click.outside") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@click.outside") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_click_once (a_expression: READABLE_STRING_GENERAL): like Current
@@ -185,7 +185,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@click.once") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@click.once") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_submit (a_expression: READABLE_STRING_GENERAL): like Current
@@ -195,7 +195,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@submit") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@submit") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_submit_prevent (a_expression: READABLE_STRING_GENERAL): like Current
@@ -205,7 +205,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@submit.prevent") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@submit.prevent") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_change (a_expression: READABLE_STRING_GENERAL): like Current
@@ -215,7 +215,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@change") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@change") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_input (a_expression: READABLE_STRING_GENERAL): like Current
@@ -225,7 +225,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@input") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@input") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_input_debounce (a_expression: READABLE_STRING_GENERAL; a_ms: INTEGER): like Current
@@ -238,7 +238,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attributes.has ("@input.debounce." + a_ms.out + "ms")
+			attribute_set: raw_attributes.has ("@input.debounce." + a_ms.out + "ms")
 		end
 
 	x_on_focus (a_expression: READABLE_STRING_GENERAL): like Current
@@ -248,7 +248,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@focus") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@focus") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_blur (a_expression: READABLE_STRING_GENERAL): like Current
@@ -258,7 +258,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@blur") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@blur") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_mouseenter (a_expression: READABLE_STRING_GENERAL): like Current
@@ -268,7 +268,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@mouseenter") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@mouseenter") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_mouseleave (a_expression: READABLE_STRING_GENERAL): like Current
@@ -278,7 +278,7 @@ feature -- Alpine: Event Directives (x-on / @)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@mouseleave") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@mouseleave") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature -- Alpine: Keyboard Event Directives
@@ -290,7 +290,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keydown") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keydown") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keydown_escape (a_expression: READABLE_STRING_GENERAL): like Current
@@ -300,7 +300,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keydown.escape") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keydown.escape") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keydown_enter (a_expression: READABLE_STRING_GENERAL): like Current
@@ -310,7 +310,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keydown.enter") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keydown.enter") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keydown_tab (a_expression: READABLE_STRING_GENERAL): like Current
@@ -320,7 +320,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keydown.tab") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keydown.tab") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keydown_arrow_up (a_expression: READABLE_STRING_GENERAL): like Current
@@ -330,7 +330,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keydown.arrow-up") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keydown.arrow-up") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keydown_arrow_down (a_expression: READABLE_STRING_GENERAL): like Current
@@ -340,7 +340,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keydown.arrow-down") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keydown.arrow-down") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keydown_space (a_expression: READABLE_STRING_GENERAL): like Current
@@ -350,7 +350,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keydown.space") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keydown.space") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keyup (a_expression: READABLE_STRING_GENERAL): like Current
@@ -360,7 +360,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keyup") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keyup") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keyup_escape (a_expression: READABLE_STRING_GENERAL): like Current
@@ -370,7 +370,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keyup.escape") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keyup.escape") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_keyup_enter (a_expression: READABLE_STRING_GENERAL): like Current
@@ -380,7 +380,7 @@ feature -- Alpine: Keyboard Event Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@keyup.enter") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@keyup.enter") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature -- Alpine: Window/Document Events
@@ -395,7 +395,7 @@ feature -- Alpine: Window/Document Events
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attributes.has ("@" + a_event.to_string_8 + ".window")
+			attribute_set: raw_attributes.has ("@" + a_event.to_string_8 + ".window")
 		end
 
 	x_on_document (a_event, a_expression: READABLE_STRING_GENERAL): like Current
@@ -407,7 +407,7 @@ feature -- Alpine: Window/Document Events
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attributes.has ("@" + a_event.to_string_8 + ".document")
+			attribute_set: raw_attributes.has ("@" + a_event.to_string_8 + ".document")
 		end
 
 	x_on_scroll_window (a_expression: READABLE_STRING_GENERAL): like Current
@@ -417,7 +417,7 @@ feature -- Alpine: Window/Document Events
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@scroll.window") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@scroll.window") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_on_resize_window (a_expression: READABLE_STRING_GENERAL): like Current
@@ -427,7 +427,7 @@ feature -- Alpine: Window/Document Events
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("@resize.window") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("@resize.window") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature -- Alpine: Binding Directives (x-bind / :)
@@ -442,7 +442,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attributes.has ("x-bind:" + a_attribute.to_string_8)
+			attribute_set: raw_attributes.has ("x-bind:" + a_attribute.to_string_8)
 		end
 
 	x_bind_class (a_expression: READABLE_STRING_GENERAL): like Current
@@ -453,7 +453,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item (":class") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item (":class") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_bind_style (a_expression: READABLE_STRING_GENERAL): like Current
@@ -463,7 +463,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item (":style") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item (":style") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_bind_disabled (a_expression: READABLE_STRING_GENERAL): like Current
@@ -473,7 +473,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item (":disabled") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item (":disabled") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_bind_hidden (a_expression: READABLE_STRING_GENERAL): like Current
@@ -483,7 +483,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item (":hidden") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item (":hidden") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_bind_href (a_expression: READABLE_STRING_GENERAL): like Current
@@ -493,7 +493,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item (":href") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item (":href") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_bind_src (a_expression: READABLE_STRING_GENERAL): like Current
@@ -503,7 +503,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item (":src") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item (":src") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_bind_value (a_expression: READABLE_STRING_GENERAL): like Current
@@ -513,7 +513,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item (":value") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item (":value") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_bind_aria (a_aria_attr, a_expression: READABLE_STRING_GENERAL): like Current
@@ -526,7 +526,7 @@ feature -- Alpine: Binding Directives (x-bind / :)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attributes.has (":aria-" + a_aria_attr.to_string_8)
+			attribute_set: raw_attributes.has (":aria-" + a_aria_attr.to_string_8)
 		end
 
 feature -- Alpine: Form Binding (x-model)
@@ -539,7 +539,7 @@ feature -- Alpine: Form Binding (x-model)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-model") as v and then v.same_string (a_property.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-model") as v and then v.same_string (a_property.to_string_32)
 		end
 
 	x_model_lazy (a_property: READABLE_STRING_GENERAL): like Current
@@ -549,7 +549,7 @@ feature -- Alpine: Form Binding (x-model)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-model.lazy") as v and then v.same_string (a_property.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-model.lazy") as v and then v.same_string (a_property.to_string_32)
 		end
 
 	x_model_number (a_property: READABLE_STRING_GENERAL): like Current
@@ -559,7 +559,7 @@ feature -- Alpine: Form Binding (x-model)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-model.number") as v and then v.same_string (a_property.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-model.number") as v and then v.same_string (a_property.to_string_32)
 		end
 
 	x_model_debounce (a_property: READABLE_STRING_GENERAL; a_ms: INTEGER): like Current
@@ -571,7 +571,7 @@ feature -- Alpine: Form Binding (x-model)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attributes.has ("x-model.debounce." + a_ms.out + "ms")
+			attribute_set: raw_attributes.has ("x-model.debounce." + a_ms.out + "ms")
 		end
 
 	x_model_throttle (a_property: READABLE_STRING_GENERAL; a_ms: INTEGER): like Current
@@ -583,7 +583,7 @@ feature -- Alpine: Form Binding (x-model)
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attributes.has ("x-model.throttle." + a_ms.out + "ms")
+			attribute_set: raw_attributes.has ("x-model.throttle." + a_ms.out + "ms")
 		end
 
 feature -- Alpine: Loop Directive
@@ -597,7 +597,7 @@ feature -- Alpine: Loop Directive
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-for") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-for") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature -- Alpine: Reference Directive
@@ -612,7 +612,7 @@ feature -- Alpine: Reference Directive
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-ref") as v and then v.same_string (a_name.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-ref") as v and then v.same_string (a_name.to_string_32)
 		end
 
 feature -- Alpine: Transition Directives
@@ -691,7 +691,7 @@ feature -- Alpine: Transition Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-transition:enter") as v and then v.same_string (a_classes.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-transition:enter") as v and then v.same_string (a_classes.to_string_32)
 		end
 
 	x_transition_enter_start (a_classes: READABLE_STRING_GENERAL): like Current
@@ -701,7 +701,7 @@ feature -- Alpine: Transition Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-transition:enter-start") as v and then v.same_string (a_classes.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-transition:enter-start") as v and then v.same_string (a_classes.to_string_32)
 		end
 
 	x_transition_enter_end (a_classes: READABLE_STRING_GENERAL): like Current
@@ -711,7 +711,7 @@ feature -- Alpine: Transition Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-transition:enter-end") as v and then v.same_string (a_classes.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-transition:enter-end") as v and then v.same_string (a_classes.to_string_32)
 		end
 
 	x_transition_leave (a_classes: READABLE_STRING_GENERAL): like Current
@@ -721,7 +721,7 @@ feature -- Alpine: Transition Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-transition:leave") as v and then v.same_string (a_classes.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-transition:leave") as v and then v.same_string (a_classes.to_string_32)
 		end
 
 	x_transition_leave_start (a_classes: READABLE_STRING_GENERAL): like Current
@@ -731,7 +731,7 @@ feature -- Alpine: Transition Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-transition:leave-start") as v and then v.same_string (a_classes.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-transition:leave-start") as v and then v.same_string (a_classes.to_string_32)
 		end
 
 	x_transition_leave_end (a_classes: READABLE_STRING_GENERAL): like Current
@@ -741,7 +741,7 @@ feature -- Alpine: Transition Directives
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-transition:leave-end") as v and then v.same_string (a_classes.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-transition:leave-end") as v and then v.same_string (a_classes.to_string_32)
 		end
 
 feature -- Alpine: Effect Directive
@@ -754,7 +754,7 @@ feature -- Alpine: Effect Directive
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-effect") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-effect") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature -- Alpine: Ignore Directive
@@ -781,7 +781,7 @@ feature -- Alpine: Teleport Directive
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-teleport") as v and then v.same_string (a_selector.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-teleport") as v and then v.same_string (a_selector.to_string_32)
 		end
 
 feature -- Alpine: ID Directive
@@ -794,7 +794,7 @@ feature -- Alpine: ID Directive
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-id") as v and then v.same_string (a_names.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-id") as v and then v.same_string (a_names.to_string_32)
 		end
 
 feature -- Alpine: Plugin - Collapse
@@ -831,7 +831,7 @@ feature -- Alpine: Plugin - Focus/Trap
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-trap") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-trap") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_trap_inert (a_expression: READABLE_STRING_GENERAL): like Current
@@ -841,7 +841,7 @@ feature -- Alpine: Plugin - Focus/Trap
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-trap.inert") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-trap.inert") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_trap_noscroll (a_expression: READABLE_STRING_GENERAL): like Current
@@ -851,7 +851,7 @@ feature -- Alpine: Plugin - Focus/Trap
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-trap.noscroll") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-trap.noscroll") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature -- Alpine: Plugin - Intersect
@@ -863,7 +863,7 @@ feature -- Alpine: Plugin - Intersect
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-intersect") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-intersect") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_intersect_enter (a_expression: READABLE_STRING_GENERAL): like Current
@@ -873,7 +873,7 @@ feature -- Alpine: Plugin - Intersect
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-intersect:enter") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-intersect:enter") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_intersect_leave (a_expression: READABLE_STRING_GENERAL): like Current
@@ -883,7 +883,7 @@ feature -- Alpine: Plugin - Intersect
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-intersect:leave") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-intersect:leave") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 	x_intersect_once (a_expression: READABLE_STRING_GENERAL): like Current
@@ -893,20 +893,21 @@ feature -- Alpine: Plugin - Intersect
 			Result := Current
 		ensure
 			fluent_result: Result = Current
-			attribute_set: attached attributes.item ("x-intersect.once") as v and then v.same_string (a_expression.to_string_32)
+			attribute_set: attached raw_attributes.item ("x-intersect.once") as v and then v.same_string (a_expression.to_string_32)
 		end
 
 feature {NONE} -- Implementation
 
 	set_alpine_attribute (a_name: STRING; a_value: READABLE_STRING_GENERAL)
-			-- Set an Alpine attribute.
+			-- Set an Alpine attribute (using raw attributes to avoid HTML escaping).
+			-- Alpine attributes contain JavaScript expressions that should not be escaped.
 		require
 			name_not_empty: not a_name.is_empty
 		do
-			attributes.force (a_value.to_string_32, a_name)
+			raw_attributes.force (a_value.to_string_32, a_name)
 		ensure
-			attribute_set: attached attributes.item (a_name)
-			value_matches: attached attributes.item (a_name) as v implies v.same_string (a_value.to_string_32)
+			attribute_set: attached raw_attributes.item (a_name)
+			value_matches: attached raw_attributes.item (a_name) as v implies v.same_string (a_value.to_string_32)
 		end
 
 invariant

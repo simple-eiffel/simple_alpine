@@ -805,12 +805,69 @@ feature -- Test: Additional Plugin Directives
 			assert_has_substring ("x-intersect.once present", l_div.to_html_8, "x-intersect.once=")
 		end
 
+feature -- Test: Known Issue - HTML Escaping in JavaScript
+
+	test_arrow_function_not_escaped
+			-- Test that arrow functions (=>) are NOT escaped to &gt;
+			-- This is a known issue documented in ROADMAP.md
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_data ("{ add: (item) => items.push(item) }").do_nothing
+			-- Arrow function => should be preserved, not escaped to &gt;
+			assert_has_substring ("arrow function preserved", l_div.to_html_8, "=>")
+			assert_no_substring ("arrow function not escaped", l_div.to_html_8, "&gt;")
+		end
+
+	test_logical_and_not_escaped
+			-- Test that logical AND (&&) is NOT escaped to &amp;&amp;
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_show ("isActive && isVisible").do_nothing
+			-- Logical AND && should be preserved, not escaped to &amp;&amp;
+			assert_has_substring ("logical AND preserved", l_div.to_html_8, "&&")
+			assert_no_substring ("logical AND not escaped", l_div.to_html_8, "&amp;")
+		end
+
+	test_comparison_operators_not_escaped
+			-- Test that comparison operators (< and >) are NOT escaped
+		local
+			l_template: ALPINE_TEMPLATE
+		do
+			create l_template.make
+			l_template.x_if ("items.length > 0").do_nothing
+			-- Greater than > should be preserved, not escaped to &gt;
+			assert_has_substring ("greater than preserved", l_template.to_html_8, "> 0")
+			assert_no_substring ("greater than not escaped", l_template.to_html_8, "&gt;")
+		end
+
+	test_less_than_not_escaped
+			-- Test that less-than operator (<) is NOT escaped
+		local
+			l_div: ALPINE_DIV
+		do
+			create l_div.make
+			l_div.x_show ("count < 10").do_nothing
+			-- Less than < should be preserved, not escaped to &lt;
+			assert_has_substring ("less than preserved", l_div.to_html_8, "< 10")
+			assert_no_substring ("less than not escaped", l_div.to_html_8, "&lt;")
+		end
+
 feature {NONE} -- Implementation
 
 	assert_has_substring (a_tag: STRING; a_string, a_substring: STRING)
 			-- Assert that a_string contains a_substring.
 		do
 			assert (a_tag, a_string.has_substring (a_substring))
+		end
+
+	assert_no_substring (a_tag: STRING; a_string, a_substring: STRING)
+			-- Assert that a_string does NOT contain a_substring.
+		do
+			assert (a_tag, not a_string.has_substring (a_substring))
 		end
 
 end
