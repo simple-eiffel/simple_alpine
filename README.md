@@ -196,15 +196,13 @@ l_btn.x_data (alpine.loading_data)
 
 ## Project Status
 
-- **99 tests passing**
+- **103 tests passing**
 - **28 classes** (2 core + 26 elements)
-- **Mock app** with working components (dark mode, dropdown, modal, tabs, accordion, counter)
+- **Mock app** with 13 working demo components showcasing all Alpine.js features
 
 ## Known Issues
 
-### HTML Escaping Limitation
-
-JavaScript in Alpine attributes gets HTML-escaped by simple_htmx (e.g., `=>` becomes `&gt;`). Workaround: Avoid arrow functions in x-data/x-init expressions. Use `x_effect` for side effects instead of `$watch` with arrow functions.
+None currently. The HTML escaping limitation was resolved in v1.1 by adding raw_attributes support to simple_htmx. Arrow functions, logical operators, and comparison operators now work correctly in Alpine.js directives.
 
 ## License
 

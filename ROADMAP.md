@@ -51,15 +51,16 @@ rm -rf EIFGENs && "/c/Program Files/Eiffel Software/EiffelStudio 25.02 Standard/
 
 ### Current Status
 
-**Phase 1 Complete** - 99 tests passing, mock app working
+**Phase 1 Complete** - 103 tests passing, mock app working
 
 Completed work:
 - ✅ ALPINE_ELEMENT base class with all Alpine.js directives
 - ✅ ALPINE_FACTORY with expression helpers and pre-built patterns
 - ✅ 26 element subclasses (inheriting from HTMX elements)
-- ✅ 99 tests passing
-- ✅ DBC contracts throughout
-- ✅ Mock app with 7 working components
+- ✅ 103 tests passing (including 4 escaping regression tests)
+- ✅ DBC contracts throughout (Specification Hat methodology)
+- ✅ Mock app with 13 working demo components
+- ✅ HTML escaping issue resolved via raw_attributes
 - ✅ GitHub repo created and pushed
 
 ---
@@ -127,16 +128,24 @@ All inherit from ALPINE_ELEMENT (which inherits HTMX_ELEMENT):
 - **Special**: alpine_template (for x-if)
 
 ### Mock App
-Located in `src/mock_app/mock_app.e` - Generates index.html with working components:
-- Dark mode toggle (with localStorage persistence)
-- Dropdown menu (click-outside close, Escape key)
-- Modal dialog (backdrop, focus trap)
-- Tabs (active indicator, content panels)
-- Accordion (collapsible with x-collapse animation)
-- Counter (increment/decrement)
-- HTMX + Alpine combo (loading state)
+Located in `src/mock_app/mock_app.e` - Generates index.html with 13 demo components:
+1. Dark mode toggle (with localStorage persistence)
+2. Dropdown menu (click-outside close, Escape key)
+3. Modal dialog (backdrop, focus trap)
+4. Tabs (active indicator, content panels)
+5. Accordion (collapsible with x-collapse animation)
+6. Counter (increment/decrement)
+7. HTMX + Alpine combo (loading state)
+8. Form demo (x-model two-way binding)
+9. Dynamic list (x-for loops, $refs)
+10. Element references ($refs magic property)
+11. Custom events ($dispatch)
+12. Navigation menu (x-show, x-transition)
+13. Intersection observer (x-intersect plugin)
 
-**28 classes total. 99 tests passing.**
+Each component includes "What to expect" explanations and "Directives used" summaries.
+
+**28 classes total. 103 tests passing.**
 
 ---
 
@@ -200,7 +209,7 @@ TESTING_EXT=D:\prod\testing_ext
 | **Factory class** | Element creation + helpers | ✅ |
 | **Pre-built patterns** | dark mode, dropdown, modal, tabs | ✅ |
 | **26 element classes** | All common elements | ✅ |
-| **Test suite** | 99 tests | ✅ |
+| **Test suite** | 103 tests | ✅ |
 | **DBC contracts** | Preconditions, postconditions, loop variants | ✅ |
 | **Mock app** | Browser-testable components | ✅ |
 
@@ -246,6 +255,27 @@ TESTING_EXT=D:\prod\testing_ext
 ---
 
 ## Session Notes
+
+### 2025-12-03 (Mock App Expansion + HTML Escaping Fix)
+
+**Task**: Fix HTML escaping issue and expand mock app to demonstrate all features
+
+**HTML Escaping Fix**:
+- Problem: JavaScript in Alpine attributes was HTML-escaped (`=>` → `&gt;`, `&&` → `&amp;&amp;`)
+- Solution: Added `raw_attributes` hash table to simple_htmx's HTMX_ELEMENT
+- Modified ALPINE_ELEMENT's `set_alpine_attribute()` to use raw_attributes
+- Added 4 regression tests for arrow functions, logical AND, comparisons
+
+**Mock App Expansion**:
+- Expanded from 7 to 13 demo components
+- Added form binding, dynamic lists, element refs, custom events, navigation, intersection observer
+- Added comprehensive "What to expect" explanations for each component
+- Added "Directives used" summaries
+- Fixed dark mode styling for info boxes and form elements
+
+**Result**: 103 tests passing, mock app showcases ALL Alpine.js features
+
+---
 
 ### 2025-12-03 (Initial Creation + Phase 1 Complete)
 
