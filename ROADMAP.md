@@ -218,25 +218,30 @@ TESTING_EXT=D:\prod\testing_ext
 | **Additional plugins** | Persist, Morph, Focus | Backlog |
 | **Component helpers** | Toast, Tooltip, Popover | Backlog |
 | **Alpine stores** | Global state management helpers | Backlog |
-| **Raw attribute support** | Unescaped values for complex JS | Backlog |
+| **Raw attribute support** | Unescaped values for complex JS | ✅ Complete |
 
 ---
 
 ## Known Issues
 
-### HTML Escaping Limitation
+~~(All known issues have been resolved)~~
 
-**Issue**: JavaScript in Alpine attributes gets HTML-escaped by simple_htmx's `escape_html` function:
-- `=>` becomes `&gt;` (breaks arrow functions)
-- `&&` becomes `&amp;&amp;` (breaks logical AND)
-- `<` and `>` in comparisons get escaped
+### ~~HTML Escaping Limitation~~ ✅ RESOLVED
 
-**Workaround**:
-1. Avoid arrow functions in x-data/x-init expressions
-2. Use `x_effect` for side effects instead of `$watch` with callbacks
-3. Use semicolons to separate statements instead of arrow functions
+**Status**: Fixed in commit 679b21d (2025-12-03)
 
-**Permanent fix (backlog)**: Add `attr_raw` method to simple_htmx for unescaped attribute values.
+**Original Issue**: JavaScript in Alpine attributes was HTML-escaped by simple_htmx's `escape_html` function:
+- `=>` became `&gt;` (broke arrow functions)
+- `&&` became `&amp;&amp;` (broke logical AND)
+- `<` and `>` in comparisons got escaped
+
+**Solution**:
+- Added `raw_attributes` hash table to HTMX_ELEMENT (simple_htmx)
+- Added `attr_raw()` method for unescaped attribute values
+- Modified ALPINE_ELEMENT to use `raw_attributes` for all Alpine directives
+- All Alpine directives now preserve JavaScript syntax correctly
+
+**Tests Added**: 4 regression tests verify arrow functions, logical AND, and comparison operators work correctly.
 
 ---
 
