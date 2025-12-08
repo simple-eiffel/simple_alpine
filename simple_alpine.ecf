@@ -22,7 +22,10 @@
 	</target>
 	<target name="simple_alpine_tests" extends="simple_alpine">
 		<root class="APPLICATION" feature="make"/>
+
 		<library name="simple_testing" location="$SIMPLE_TESTING\simple_testing.ecf"/>
+		<library name="testing" location="$ISE_LIBRARY\library\testing\testing.ecf"/>
+
 		<cluster name="tests" location=".\testing\" recursive="true"/>
 	</target>
 	<target name="mock_app" extends="simple_alpine">
