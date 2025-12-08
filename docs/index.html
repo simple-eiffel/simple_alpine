@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple_alpine - Alpine.js Builder for Eiffel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="simple_* logo" class="logo">
+        </div>
+        <h1>simple_alpine</h1>
+        <p class="tagline">Fluent Alpine.js Attribute Builder for Eiffel</p>
+        <div class="badges">
+            <span class="badge badge-version">v1.0.0</span>
+            <span class="badge badge-license">MIT</span>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#quick-start">Quick Start</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="https://github.com/simple-eiffel/simple_alpine">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>
+                <strong>simple_alpine</strong> provides fluent Alpine.js attribute building for Eiffel web applications.
+                Extends simple_htmx to add Alpine.js directives, enabling rich client-side interactivity.
+            </p>
+            <p>
+                Part of the <strong>simple_*</strong> ecosystem of focused, single-purpose Eiffel libraries.
+            </p>
+        </section>
+
+        <section id="quick-start">
+            <h2>Quick Start</h2>
+
+            <div class="quick-start">
+                <h3>Installation</h3>
+                <p>Add to your ECF file:</p>
+<pre><code>&lt;library name="simple_alpine" location="$SIMPLE_ALPINE/simple_alpine.ecf"/&gt;</code></pre>
+            </div>
+
+            <h3>Basic Usage</h3>
+<pre><code><span class="keyword">local</span>
+    div: <span class="type">ALPINE_DIV</span>
+<span class="keyword">do</span>
+    <span class="keyword">create</span> div.make
+    div.x_data (<span class="string">"{ open: false }"</span>)
+    div.x_show (<span class="string">"open"</span>)
+    div.x_on_click (<span class="string">"open = !open"</span>)
+    div.set_text (<span class="string">"Click me"</span>)
+<span class="keyword">end</span></code></pre>
+        </section>
+
+        <section id="features">
+            <h2>Features</h2>
+            <ul>
+                <li>Type-safe Alpine.js directives</li>
+                <li>Fluent builder API</li>
+                <li>Extends simple_htmx elements</li>
+                <li>x-data, x-show, x-if, x-for support</li>
+                <li>Event handling with x-on</li>
+                <li>Full Design by Contract support</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 simple_* ecosystem. MIT License.</p>
+        <p><a href="https://github.com/simple-eiffel">GitHub</a></p>
+    </footer>
+</body>
+</html>
