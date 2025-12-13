@@ -21,7 +21,7 @@
 		</cluster>
 	</target>
 	<target name="simple_alpine_tests" extends="simple_alpine">
-		<root class="APPLICATION" feature="make"/>
+		<root class="TEST_APP" feature="make"/>
 
 		<library name="simple_testing" location="$SIMPLE_TESTING\simple_testing.ecf"/>
 		<library name="testing" location="$ISE_LIBRARY\library\testing\testing.ecf"/>
