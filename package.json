@@ -1,0 +1,9 @@
+{
+  "name": "simple_alpine",
+  "version": "0.1.0",
+  "description": "Simple Alpine - Fluent Alpine.js attribute builder for Eiffel web applications",
+  "author": "Larry Rix",
+  "license": "MIT",
+  "category": "web",
+  "keywords": ["alpinejs", "reactive", "frontend"]
+}
