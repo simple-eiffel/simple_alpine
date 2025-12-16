@@ -13,7 +13,7 @@
 			<void_safety support="all"/>
 		</capability>
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
-		<library name="simple_htmx" location="$SIMPLE_HTMX\simple_htmx.ecf"/>
+		<library name="simple_htmx" location="$SIMPLE_EIFFEL/simple_htmx/simple_htmx.ecf"/>
 		<cluster name="src" location=".\src\" recursive="true">
 			<file_rule>
 				<exclude>/mock_app$</exclude>
@@ -23,7 +23,7 @@
 	<target name="simple_alpine_tests" extends="simple_alpine">
 		<root class="TEST_APP" feature="make"/>
 
-		<library name="simple_testing" location="$SIMPLE_TESTING\simple_testing.ecf"/>
+		<library name="simple_testing" location="$SIMPLE_EIFFEL/simple_testing/simple_testing.ecf"/>
 		<library name="testing" location="$ISE_LIBRARY\library\testing\testing.ecf"/>
 
 		<cluster name="tests" location=".\testing\" recursive="true"/>
