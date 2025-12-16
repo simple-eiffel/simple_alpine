@@ -28,18 +28,17 @@ SIMPLE_ALPINE provides type-safe Alpine.js directive generation from Eiffel. Ele
 - [simple_htmx](https://github.com/simple-eiffel/simple_htmx)
 - [testing_ext](https://github.com/simple-eiffel/testing_ext) (for tests)
 
-### Environment Variables
+### Environment Variable
 
+Set the environment variable (one-time setup for all simple_* libraries):
 ```
-SIMPLE_ALPINE=D:\prod\simple_alpine
-SIMPLE_HTMX=D:\prod\simple_htmx
-TESTING_EXT=D:\prod\testing_ext
+SIMPLE_EIFFEL=D:\prod
 ```
 
 ### ECF Reference
 
 ```xml
-<library name="simple_alpine" location="$SIMPLE_ALPINE\simple_alpine.ecf"/>
+<library name="simple_alpine" location="$SIMPLE_EIFFEL/simple_alpine/simple_alpine.ecf"/>
 ```
 
 ## Quick Start
