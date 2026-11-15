@@ -457,7 +457,7 @@ feature -- Components
 			    .class_ ("px-4 py-2 bg-green-500 text-white rounded").do_nothing
 
 			-- Item template with x-for
-			l_remove_btn := alpine.button_text ("×")
+			l_remove_btn := alpine.button_text ("%/215/")
 			l_remove_btn.x_on_click ("items.splice(index, 1)")
 			    .class_ ("ml-2 text-red-500 hover:text-red-700").do_nothing
 
@@ -547,7 +547,7 @@ feature -- Components
 			-- Spacer to force scrolling
 			l_spacer := alpine.div
 			l_spacer.class_ ("h-32 flex items-center justify-center text-gray-400")
-			    .text ("↓ Scroll down to see intersection observer in action ↓").do_nothing
+			    .text ("%/8595/ Scroll down to see intersection observer in action %/8595/").do_nothing
 
 			-- Box 1: x-intersect:enter (animate once when entering)
 			l_box1 := alpine.div
